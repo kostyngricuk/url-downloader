@@ -6,5 +6,26 @@ Download image by URL
 2. Open in your browser link: http://127.0.0.1:3000/save?url=[img-url]
 where [img-url] is full image url
 
-## URL Example
-http://127.0.0.1:3000/save?url=https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+## Example (Shopify solution)
+```js
+const urls = [];
+function getImages() {
+    const domImages = document.querySelectorAll('img[src]');
+    domImages.forEach(el => {
+        urls.push(el.getAttribute('src'));
+    });
+}
+function downloadImage(imgUrl) {
+    const downloaderUrl = 'http://127.0.0.1:3000/save?url=' + imgUrl;
+    fetch(downloaderUrl)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+getImages();
+urls.forEach(url => downloadImage(url));
+```
