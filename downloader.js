@@ -17,8 +17,10 @@ module.exports.save = (fileurl, filename = '') => {
          data.push(chunk);                                                         
       });                                                                         
   
-      response.on('end', function() {                                             
-         fs.writeFileSync('download/' + fileurl.substring(fileurl.lastIndexOf("/") + 1), data.read());    
+      response.on('end', function() {      
+         let fileName = fileurl.substring(fileurl.lastIndexOf("/") + 1);
+         fileName = fileName.split('?')[0];
+         fs.writeFileSync('downloads/' + fileName, data.read());    
          return fileurl;            
       });                                                                         
    }).end();
