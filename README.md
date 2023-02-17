@@ -6,14 +6,15 @@ Download image by URL
 2. Open in your browser link: http://127.0.0.1:3000/save?url=[img-url]
 where [img-url] is full image url
 
-## Example (Shopify solution)
+## Example:
 ```js
-const urls = [];
 function getImages() {
+    const urls = [];
     const domImages = document.querySelectorAll('img[src]');
     domImages.forEach(el => {
         urls.push(el.getAttribute('src'));
     });
+    return urls;
 }
 function downloadImage(imgUrl) {
     const downloaderUrl = 'http://127.0.0.1:3000/save?url=' + imgUrl;
@@ -26,6 +27,6 @@ function downloadImage(imgUrl) {
         });
 }
 
-getImages();
-urls.forEach(url => downloadImage(url));
+const pageImages = getImages();
+pageImages.forEach(url => async downloadImage(url));
 ```
