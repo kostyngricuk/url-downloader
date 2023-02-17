@@ -9,10 +9,13 @@ where [img-url] is full image url
 ## Example:
 ```js
 function getImages() {
-    const urls = [];
+    const urls = new Set();
     const domImages = document.querySelectorAll('img[src]');
     domImages.forEach(el => {
-        urls.push(el.getAttribute('src'));
+        const src = el.getAttribute('src');
+        if (src) {
+            urls.add(src);
+        }
     });
     return urls;
 }
@@ -28,5 +31,5 @@ function downloadImage(imgUrl) {
 }
 
 const pageImages = getImages();
-pageImages.forEach(url => async downloadImage(url));
+pageImages.forEach(url => downloadImage(url));
 ```
