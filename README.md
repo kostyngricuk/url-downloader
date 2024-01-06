@@ -7,6 +7,7 @@ Download image by URL
 where [img-url] is full image url
 
 ## Example:
+Download all images on the page
 ```js
 function getImages() {
     const urls = new Set();
